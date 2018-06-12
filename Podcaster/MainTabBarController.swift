@@ -16,12 +16,11 @@ class MainTabBarController: UITabBarController {
         tabBar.tintColor = .purple
         
         setuViewControllers()
-        
     }
     
     fileprivate func setuViewControllers() {
         viewControllers = [
-            generateNavigationController(with: ViewController(), title: "Favorite", image: #imageLiteral(resourceName: "favorites")),
+            generateNavigationController(with: PodcastSearchController(), title: "Favorite", image: #imageLiteral(resourceName: "favorites")),
             generateNavigationController(with: ViewController(), title: "Search", image: #imageLiteral(resourceName: "search")),
             generateNavigationController(with: ViewController(), title: "Download", image: #imageLiteral(resourceName: "downloads"))
         ]
