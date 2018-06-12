@@ -19,12 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-        
         window?.rootViewController = MainTabBarController()
         
         UINavigationBar.appearance().prefersLargeTitles = true
 
-        
         return true
     }
 
