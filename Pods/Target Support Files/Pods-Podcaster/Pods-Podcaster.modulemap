@@ -1,0 +1,6 @@
+framework module Pods_Podcaster {
+  umbrella header "Pods-Podcaster-umbrella.h"
+
+  export *
+  module * { export * }
+}

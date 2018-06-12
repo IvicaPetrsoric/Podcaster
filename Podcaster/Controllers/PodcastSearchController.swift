@@ -10,9 +10,9 @@ import UIKit
 
 class PodcastSearchController: UITableViewController, UISearchBarDelegate{
     
-    let podcasts = [
-        Podcast(name: "Lets build that app 1", artistName: "Brian Voong"),
-        Podcast(name: "Lets build that app 2", artistName: "Brian Voong")
+    var podcasts = [
+        Podcast(trackName: "Lets build that app 1", artistName: "Brian Voong"),
+        Podcast(trackName: "Lets build that app 2", artistName: "Brian Voong")
     ]
     
     private let cellId = "celld"
@@ -37,9 +37,12 @@ class PodcastSearchController: UITableViewController, UISearchBarDelegate{
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        APIService.shared.fetchPodcasts(searchText: searchText) { (podcasts) in
+            self.podcasts = podcasts
+            self.tableView.reloadData()
+        }
     }
-    
+
     // MARK:- TableView
     fileprivate func setupTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
@@ -53,7 +56,7 @@ class PodcastSearchController: UITableViewController, UISearchBarDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         
         let podcast = self.podcasts[indexPath.row]
-        cell.textLabel?.text = "\(podcast.name)\n\(podcast.artistName)"
+        cell.textLabel?.text = "\(podcast.trackName ?? "")\n\(podcast.artistName ?? "")"
         cell.textLabel?.numberOfLines = 0
         cell.imageView?.image = #imageLiteral(resourceName: "appicon")
         
