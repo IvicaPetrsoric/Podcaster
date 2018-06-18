@@ -24,6 +24,9 @@
 		9ED6BD2520D06770003B374E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6BD2420D06770003B374E /* APIService.swift */; };
 		9ED6BD2920D06BAC003B374E /* PodcastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED6BD2820D06BAC003B374E /* PodcastCell.xib */; };
 		9ED6BD2B20D06D7A003B374E /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED6BD2A20D06D7A003B374E /* PodcastCell.swift */; };
+		9EDAD2DC20D82ECB00118D76 /* PlayerDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EDAD2DB20D82ECB00118D76 /* PlayerDetailsView.xib */; };
+		9EDAD2DE20D8311F00118D76 /* PlayerDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDAD2DD20D8311F00118D76 /* PlayerDetailsView.swift */; };
+		9EDAD2E020D8431D00118D76 /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDAD2DF20D8431D00118D76 /* CMTime.swift */; };
 		EFC131049E8F5082D3211FC4 /* Pods_Podcaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B74D3444E9BF0D64100A070D /* Pods_Podcaster.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +52,9 @@
 		9ED6BD2420D06770003B374E /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		9ED6BD2820D06BAC003B374E /* PodcastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastCell.xib; sourceTree = "<group>"; };
 		9ED6BD2A20D06D7A003B374E /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
+		9EDAD2DB20D82ECB00118D76 /* PlayerDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailsView.xib; sourceTree = "<group>"; };
+		9EDAD2DD20D8311F00118D76 /* PlayerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetailsView.swift; sourceTree = "<group>"; };
+		9EDAD2DF20D8431D00118D76 /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
 		B74D3444E9BF0D64100A070D /* Pods_Podcaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Podcaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -77,6 +83,7 @@
 			children = (
 				9EAE39FD20D322B60027A8E0 /* String.swift */,
 				9EAE39FF20D3238B0027A8E0 /* RSSFeed.swift */,
+				9EDAD2DF20D8431D00118D76 /* CMTime.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -155,10 +162,12 @@
 		9ED6BD2720D06B88003B374E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9ED6BD2A20D06D7A003B374E /* PodcastCell.swift */,
 				9ED6BD2820D06BAC003B374E /* PodcastCell.xib */,
-				9EAE39F820D31C0F0027A8E0 /* EpisodeCell.swift */,
+				9ED6BD2A20D06D7A003B374E /* PodcastCell.swift */,
 				9EAE39F920D31C0F0027A8E0 /* EpisodeCell.xib */,
+				9EAE39F820D31C0F0027A8E0 /* EpisodeCell.swift */,
+				9EDAD2DB20D82ECB00118D76 /* PlayerDetailsView.xib */,
+				9EDAD2DD20D8311F00118D76 /* PlayerDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EDAD2DC20D82ECB00118D76 /* PlayerDetailsView.xib in Resources */,
 				9EBECA0F20CF125100E3A0F0 /* LaunchScreen.storyboard in Resources */,
 				9EBECA0C20CF125100E3A0F0 /* Assets.xcassets in Resources */,
 				9EAE39FB20D31C0F0027A8E0 /* EpisodeCell.xib in Resources */,
@@ -290,9 +300,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EDAD2DE20D8311F00118D76 /* PlayerDetailsView.swift in Sources */,
 				9EAE3A0020D3238B0027A8E0 /* RSSFeed.swift in Sources */,
 				9ED6BD1F20D04E4E003B374E /* PodcastSearchController.swift in Sources */,
 				9EAE39FE20D322B60027A8E0 /* String.swift in Sources */,
+				9EDAD2E020D8431D00118D76 /* CMTime.swift in Sources */,
 				9EBECA1720CF199D00E3A0F0 /* ViewController.swift in Sources */,
 				9EBECA0720CF124200E3A0F0 /* MainTabBarController.swift in Sources */,
 				9EAE39F520D30E620027A8E0 /* EpisodesController.swift in Sources */,

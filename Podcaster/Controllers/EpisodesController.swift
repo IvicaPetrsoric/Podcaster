@@ -48,6 +48,39 @@ class EpisodesController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicatorView.color = .darkGray
+        activityIndicatorView.startAnimating()
+        
+        let searchLabel = UILabel()
+        searchLabel.text = "Currently Searching"
+        searchLabel.textColor = .black
+        searchLabel.textAlignment = .center
+        searchLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        let searchStack = UIStackView(arrangedSubviews: [activityIndicatorView, searchLabel])
+        searchStack.distribution = .fillEqually
+        searchStack.axis = .vertical
+
+        return searchStack
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return episodes.isEmpty ? 88 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episode = self.episodes[indexPath.row]
+        
+        let window = UIApplication.shared.keyWindow
+        let playerDetailsView = Bundle.main.loadNibNamed("PlayerDetailsView", owner: self, options: nil)?.first as! PlayerDetailsView
+        playerDetailsView.episode = episode
+        playerDetailsView.frame = self.view.frame
+        
+        window?.addSubview(playerDetailsView)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return episodes.count
     }
