@@ -13,6 +13,7 @@ class PlayerDetailsView: UIView {
     
     var episode: Episode! {
         didSet{
+            miniTitleLabel.text = episode.title
             titleLabel.text = episode.title
             authorLabel.text = episode.author
             
@@ -20,6 +21,7 @@ class PlayerDetailsView: UIView {
             
             guard let url = URL(string: episode.imageUrl ?? "") else { return }
             episodeImageView.sd_setImage(with: url, completed: nil)
+            miniEpisodeImageView.sd_setImage(with: url, completed: nil)
         }
     }
     
@@ -55,8 +57,35 @@ class PlayerDetailsView: UIView {
         self.currentTimeSlider.value = Float(percentage)
     }
     
+    var panGesture: UIPanGestureRecognizer!
+    
+    fileprivate func setupGestures() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapMaximize)))
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        miniPlayerView.addGestureRecognizer(panGesture)
+        maximizedStackView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handleDismissalPan)))
+    }
+    
+    @objc func handleDismissalPan(gesture: UIPanGestureRecognizer) {
+        if gesture.state == .changed {
+            let translation = gesture.translation(in: superview)
+            maximizedStackView.transform = CGAffineTransform.init(translationX: 0, y: translation.y)
+        } else if gesture.state == .ended {
+            let translation = gesture.translation(in: superview)
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.maximizedStackView.transform = .identity
+                
+                if translation.y > 50 {
+                    UIApplication.maintTabBarController()?.minimizePlayerDetails()
+                }
+            })
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        setupGestures()
         
         observePlayerCurrentTime()
         
@@ -65,6 +94,10 @@ class PlayerDetailsView: UIView {
         player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
             self?.enlargeEpisodeImageView()
         }
+    }
+    
+    static func initFromNib() -> PlayerDetailsView{
+        return Bundle.main.loadNibNamed("PlayerDetailsView", owner: self, options: nil)?.first as! PlayerDetailsView
     }
     
     @IBOutlet weak var playPauseButton: UIButton! {
@@ -77,10 +110,12 @@ class PlayerDetailsView: UIView {
     @objc func handlePlayPause() {
         if player.timeControlStatus == .paused {
             player.play()
+            miniPlayPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             playPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             enlargeEpisodeImageView()
         } else {
             player.pause()
+            miniPlayPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
             playPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
             shringEpisodeImageView()
         }
@@ -103,6 +138,23 @@ class PlayerDetailsView: UIView {
     }
     
     // MARK:- Actions and Outlets
+    @IBOutlet weak var miniEpisodeImageView: UIImageView!
+    @IBOutlet weak var miniTitleLabel: UILabel!
+    
+    @IBOutlet weak var miniPlayPauseButton: UIButton! {
+        didSet{
+            miniPlayPauseButton.addTarget(self, action: #selector(handlePlayPause), for: .touchUpInside)
+        }
+    }
+    
+    @IBOutlet weak var miniFastForwardButton: UIButton! {
+        didSet{
+            miniFastForwardButton.addTarget(self, action: #selector(handleFastForward), for: .touchUpInside)
+        }
+    }
+    
+    @IBOutlet weak var miniPlayerView: UIView!
+    @IBOutlet weak var maximizedStackView: UIStackView!
     
     @IBAction func handleCurrentTimeSlider(_ sender: UISlider) {
         let percentage = currentTimeSlider.value
@@ -138,7 +190,7 @@ class PlayerDetailsView: UIView {
     
     
     @IBAction func handleDismiss(_ sender: UIButton) {
-        self.removeFromSuperview()
+        UIApplication.maintTabBarController()?.minimizePlayerDetails()
     }
     
     fileprivate func enlargeEpisodeImageView() {

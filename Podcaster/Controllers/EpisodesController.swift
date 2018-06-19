@@ -30,7 +30,6 @@ class EpisodesController: UITableViewController {
         }
     }
     
-    
     fileprivate var cellId = "cellId"
     
     var episodes = [Episode]()
@@ -72,13 +71,16 @@ class EpisodesController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = self.episodes[indexPath.row]
-        
-        let window = UIApplication.shared.keyWindow
-        let playerDetailsView = Bundle.main.loadNibNamed("PlayerDetailsView", owner: self, options: nil)?.first as! PlayerDetailsView
-        playerDetailsView.episode = episode
-        playerDetailsView.frame = self.view.frame
-        
-        window?.addSubview(playerDetailsView)
+        let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
+        mainTabController?.maximizePlayerDetails(episode: episode)
+
+//        let window = UIApplication.shared.keyWindow
+//        
+//        let playerDetailsView = PlayerDetailsView.initFromNib()
+//        playerDetailsView.episode = episode
+//        playerDetailsView.frame = self.view.frame
+//        
+//        window?.addSubview(playerDetailsView)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
