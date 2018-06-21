@@ -72,15 +72,7 @@ class EpisodesController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let episode = self.episodes[indexPath.row]
         let mainTabController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController
-        mainTabController?.maximizePlayerDetails(episode: episode)
-
-//        let window = UIApplication.shared.keyWindow
-//        
-//        let playerDetailsView = PlayerDetailsView.initFromNib()
-//        playerDetailsView.episode = episode
-//        playerDetailsView.frame = self.view.frame
-//        
-//        window?.addSubview(playerDetailsView)
+        mainTabController?.maximizePlayerDetails(episode: episode, playlistEpisodes: self.episodes)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
