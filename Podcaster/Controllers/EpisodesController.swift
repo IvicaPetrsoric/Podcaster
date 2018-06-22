@@ -38,6 +38,38 @@ class EpisodesController: UITableViewController {
         super.viewDidLoad()
         
         setupTableView()
+        setupNavigationBarButtons()
+    }
+    
+    fileprivate func setupNavigationBarButtons() {
+        let savedPodcasts = UserDefaults.standard.savedPodcasts()
+        let hasFavorited = savedPodcasts.index(where: {
+            $0.trackName == self.podcast?.trackName && $0.artworkUrl600 == self.podcast?.artistName
+        }) != nil
+
+        if hasFavorited {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "heart"), style: .plain, target: nil, action: nil)
+        } else {
+            navigationItem.rightBarButtonItems = [
+                UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(handleSaveFavorite)),
+            ]
+        }
+    }
+        
+    @objc fileprivate func handleSaveFavorite() {
+        guard let podcast = self.podcast else { return }
+        
+        var listOfPodcasts = UserDefaults.standard.savedPodcasts()
+        listOfPodcasts.append(podcast)
+        let data = NSKeyedArchiver.archivedData(withRootObject: listOfPodcasts)
+        UserDefaults.standard.set(data, forKey: UserDefaults.favoritedPodcastKey)
+        
+        showBadgeHighlight()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "heart"), style: .plain, target: nil, action: nil)
+    }
+    
+    fileprivate func showBadgeHighlight() {
+        UIApplication.maintTabBarController()?.viewControllers?[1].tabBarItem.badgeValue = "New"
     }
     
     //MARK:- UITableView
@@ -89,4 +121,9 @@ class EpisodesController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 134
     }
+    
+
+    
+    
+
 }
