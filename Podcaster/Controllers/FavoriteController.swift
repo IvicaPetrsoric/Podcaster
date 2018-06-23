@@ -40,6 +40,7 @@ class FavoriteController: UICollectionViewController, UICollectionViewDelegateFl
         
         let alertController = UIAlertController(title: "Remove Podcast?", message: nil, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (_) in
+            UserDefaults.standard.deletePodcast(podcast: self.podcasts[selectedIndexPath.item])
             self.podcasts.remove(at: selectedIndexPath.item)
             self.collectionView?.deleteItems(at: [selectedIndexPath])
         }))

@@ -44,7 +44,7 @@ class EpisodesController: UITableViewController {
     fileprivate func setupNavigationBarButtons() {
         let savedPodcasts = UserDefaults.standard.savedPodcasts()
         let hasFavorited = savedPodcasts.index(where: {
-            $0.trackName == self.podcast?.trackName && $0.artworkUrl600 == self.podcast?.artistName
+            $0.trackName == self.podcast?.trackName && $0.artistName == self.podcast?.artistName
         }) != nil
 
         if hasFavorited {
@@ -99,6 +99,16 @@ class EpisodesController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return episodes.isEmpty ? 88 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let downloadAction = UITableViewRowAction(style: .normal, title: "Download") { (_, _) in
+            let episopde = self.episodes[indexPath.row]
+            UserDefaults.standard.downloadEpisode(episode: episopde)
+            
+            APIService.shared.downloadEpisode(episode: episopde)
+        }
+        return [downloadAction]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

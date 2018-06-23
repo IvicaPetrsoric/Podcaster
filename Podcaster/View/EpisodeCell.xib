@@ -50,9 +50,19 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOY-dP-dOr">
+                        <rect key="frame" x="19" y="111.5" width="95.5" height="44"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <size key="shadowOffset" width="0.0" height="2"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="iOY-dP-dOr" firstAttribute="centerY" secondItem="XGa-Fv-aai" secondAttribute="centerY" id="B1U-od-pGd"/>
                     <constraint firstItem="XGa-Fv-aai" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="CYS-kP-8u9"/>
+                    <constraint firstItem="iOY-dP-dOr" firstAttribute="centerX" secondItem="XGa-Fv-aai" secondAttribute="centerX" id="IE3-Cu-vys"/>
                     <constraint firstItem="XGa-Fv-aai" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QUc-jN-U8V"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ArG-Jf-4mh" secondAttribute="trailing" id="W0z-or-12D"/>
                     <constraint firstItem="ArG-Jf-4mh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XB8-Jc-VmC"/>
@@ -63,6 +73,7 @@
             <connections>
                 <outlet property="descriptionLabel" destination="ciq-Yz-tKp" id="1nn-JB-7CG"/>
                 <outlet property="episodeImageView" destination="XGa-Fv-aai" id="hNy-T1-fQa"/>
+                <outlet property="progressLabel" destination="iOY-dP-dOr" id="43f-UM-vwm"/>
                 <outlet property="pubDateLabel" destination="gpx-HX-erR" id="k1o-gc-itD"/>
                 <outlet property="titleLabel" destination="wtY-uL-AW5" id="9aU-kQ-fLi"/>
             </connections>

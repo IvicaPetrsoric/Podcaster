@@ -9,7 +9,7 @@
 import Foundation
 import FeedKit
 
-struct Episode {
+struct Episode: Codable{
     
     let title: String
     let pubDate: Date
@@ -18,6 +18,7 @@ struct Episode {
     let streamUrl: String
     
     var imageUrl: String?
+    var fileUrl: String?
     
     init(feedItem: RSSFeedItem) {
         self.title = feedItem.title ?? ""
