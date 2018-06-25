@@ -10,11 +10,7 @@ import Foundation
 import Alamofire
 import FeedKit
 
-extension Notification.Name {
-    
-    static let downloadProgress = NSNotification.Name("downloadedProgress")
-    static let downloadedCompleate = NSNotification.Name("downloadedCompleate")
-}
+
 
 class APIService {
     
@@ -86,9 +82,5 @@ class APIService {
             }
         }
     }
-    
-    struct SearchResults: Decodable {
-        let resultCount: Int
-        let results: [Podcast]
-    }
+
 }

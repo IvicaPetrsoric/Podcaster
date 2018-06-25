@@ -11,7 +11,7 @@ import SDWebImage
 
 class PodcastCell: UITableViewCell {
     
-    @IBOutlet weak var podcastImageView: UIImageView!
+    @IBOutlet weak var podcastImageView: CustomImageView!
     @IBOutlet weak var trackNameLabel: UILabel!
     @IBOutlet weak var episodeCountLabel: UILabel!
     @IBOutlet weak var artistNameLabel: UILabel!
@@ -20,11 +20,13 @@ class PodcastCell: UITableViewCell {
         didSet {
             trackNameLabel.text = podcast.trackName
             artistNameLabel.text = podcast.artistName
-            
             episodeCountLabel.text = "\(podcast.trackCount ?? 0) Episodes"
+            podcastImageView.progressIndicatorShouldAnimate(animate: true)
             
             guard let url = URL(string: podcast.artworkUrl600 ?? "") else { return }
-            podcastImageView.sd_setImage(with: url, completed: nil)
+            podcastImageView.sd_setImage(with: url) { (_, _, _, _) in
+                self.podcastImageView.progressIndicatorShouldAnimate(animate: false)
+            }
         }
     }
 }

@@ -28,4 +28,5 @@ struct Episode: Codable{
         self.author = feedItem.iTunes?.iTunesAuthor ?? ""
         self.streamUrl = feedItem.enclosure?.attributes?.url ?? ""
     }
+    
 }

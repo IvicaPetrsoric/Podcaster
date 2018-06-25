@@ -10,7 +10,8 @@ import UIKit
 
 class FavoriteController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
-    fileprivate let cellId = "cellId"
+    let cellId = "cellId"
+    let headerId = "headerId"
     var podcasts = UserDefaults.standard.savedPodcasts()
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class FavoriteController: UICollectionViewController, UICollectionViewDelegateFl
     fileprivate func setupCollectionView() {
         collectionView?.backgroundColor = .white
         collectionView?.register(FavoritePodcastCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FavoriteHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
         
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         collectionView?.addGestureRecognizer(gesture)
@@ -49,32 +51,4 @@ class FavoriteController: UICollectionViewController, UICollectionViewDelegateFl
         present(alertController, animated: true)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return podcasts.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FavoritePodcastCell
-        cell.podcast = self.podcasts[indexPath.item]
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let episodesController = EpisodesController()
-        episodesController.podcast = self.podcasts[indexPath.item]
-        navigationController?.pushViewController(episodesController, animated: true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (view.frame.width - 3 * 16) / 2
-        return CGSize(width: width, height: width + 46)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(16, 16, 16, 16)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
-    }
 }

@@ -14,26 +14,37 @@ class FavoritePodcastCell: BaseCell {
         didSet {
             nameLabel.text = podcast.trackName
             artistNameLabel.text = podcast.artistName
+            imageView.progressIndicatorShouldAnimate(animate: true)
             
             let url = URL(string: podcast.artworkUrl600 ?? "")
-            imageView.sd_setImage(with: url)
+            imageView.sd_setImage(with: url) { (_, _, _, _) in
+                self.imageView.progressIndicatorShouldAnimate(animate: false)
+            }
         }
     }
     
-    let imageView = UIImageView(image: #imageLiteral(resourceName: "appicon"))
-    let nameLabel = UILabel()
-    let artistNameLabel = UILabel()
-
-    override func setupCell() {
-        stylingUI()
-        setupViews()
-    }
+    lazy var imageView: CustomImageView = {
+        let iv = CustomImageView(image: #imageLiteral(resourceName: "appicon"))
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
     
-    fileprivate func stylingUI() {
-        nameLabel.text = "Podcast name"
-        nameLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        artistNameLabel.text = "Artiost"
-        artistNameLabel.font = UIFont.systemFont(ofSize: 13)
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Podcast name"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        return label
+    }()
+
+    lazy var artistNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Artist"
+        label.font = UIFont.systemFont(ofSize: 13)
+        return label
+    }()
+    
+    override func setupCell() {
+        setupViews()
     }
     
     fileprivate func setupViews() {
@@ -49,9 +60,5 @@ class FavoritePodcastCell: BaseCell {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-    
-    
-    
-    
     
 }
