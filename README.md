@@ -19,12 +19,16 @@ When running your favorite episode a view with audio players is shown. While fet
  
   <img src="images/search.png" widht= 150 height = 300  hspace="30" />  <img src="images/searchAdd.png" widht= 150 height = 300  hspace="30" />  <img src="images/searchDelete.png" widht= 150 height = 300  hspace="30" />
   
-  ## Download View
+ ## Download View
   Every podcast episode can be locally stored on the device and it is shown on the Download tab section. Every downloaded episode can be deleted by dragging on the left side of it.
   
   <img src="images/download.png" widht= 150 height = 300  hspace="30" />  <img src="images/downloadAdd.png" widht= 150 height = 300  hspace="30" />  <img src="images/downloadShown.png" widht= 150 height = 300  hspace="30" />
   
-
+## Playback View
+  While listening to podcasts playback is enabled when app enters background mode.
+  
+    <img src="images/backgroundMode.jpg" widht= 150 height = 300  hspace="30" /> 
+  
 # Main Features:
 - Alamofire Integration to greatly simplify network requests architecture
 - AVKit Audio Player libraries for audio playback
