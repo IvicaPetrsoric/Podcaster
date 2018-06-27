@@ -11,13 +11,14 @@ import Alamofire
 import FeedKit
 
 
-
 class APIService {
     
     typealias EpisodeDownloadedCompleteTuple = (fileUrl: String, episodeTitle: String)
+    typealias PodcastDownloadCompleteTuple = (podcasts: [Podcast], noWebConnection: Bool)
     
     private let baseURL = "https://itunes.apple.com/search"
     static let shared = APIService()
+    
     
     func downloadEpisode(episode: Episode) {
         let downloadRequest = DownloadRequest.suggestedDownloadDestination()
@@ -62,12 +63,16 @@ class APIService {
         }
     }
     
-    func fetchPodcasts(searchText: String, completionHandler: @escaping ([Podcast]) -> ()) {
+    func fetchPodcasts(searchText: String, completionHandler: @escaping (PodcastDownloadCompleteTuple) -> ()) {
         let parameters = ["term": searchText, "media": "podcast"]
         
         Alamofire.request(baseURL, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).response { (dataResponse) in
+            var podcastDownloaadComplete = PodcastDownloadCompleteTuple([], false)
+
             if let err = dataResponse.error {
                 print("Failed to contact yahoo", err)
+                podcastDownloaadComplete.noWebConnection = true
+                completionHandler(podcastDownloaadComplete)
                 return
             }
             
@@ -75,7 +80,8 @@ class APIService {
             
             do {
                 let searchResult = try JSONDecoder().decode(SearchResults.self, from: data)
-                completionHandler(searchResult.results)
+                podcastDownloaadComplete.podcasts = searchResult.results
+                completionHandler(podcastDownloaadComplete)
 
             } catch let err {
                 print("Failed to decode:",err)

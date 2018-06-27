@@ -49,7 +49,7 @@ class PlayerDetailsView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //        setupRemoteControl()
+        setupRemoteControl()
         setupGestures()
         setupInterruptionObserver()
         

@@ -12,8 +12,7 @@ import MediaPlayer
 extension PlayerDetailsView {
     
     func setupRemoteControl() {
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        
+        UIApplication.shared.beginReceivingRemoteControlEvents()
         let commandCenter = MPRemoteCommandCenter.shared()
         
         commandCenter.playCommand.isEnabled = true
