@@ -22,7 +22,7 @@ When running your favorite episode a view with audio players is shown. While fet
  ## Download View
   Every podcast episode can be locally stored on the device and it is shown on the Download tab section. Every downloaded episode can be deleted by dragging on the left side of it.
   
-  <img src="images/download.png" widht= 150 height = 300  hspace="30" />  <img src="images/downloadAdd.png" widht= 150 height = 300  hspace="30" />  <img src="images/downloadShown.png" widht= 150 height = 300  hspace="30" />
+  <img src="images/download.png" widht= 150 height = 300  hspace="30" />  <img src="images/downloadAdd.png" widht= 150 height = 300  hspace="30" />  <img src="images/downloadShown.png" widht= 150 height = 300  hspace="30" /> <img src="images/downloadDelete.png" widht= 150 height = 300  hspace="30" />
   
 ## Playback View
   While listening to podcasts playback is enabled when app enters background mode.
