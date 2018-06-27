@@ -26,8 +26,8 @@ When running your favorite episode a view with audio players is shown. While fet
   
 ## Playback View
   While listening to podcasts playback is enabled when app enters background mode.
-  
-    <img src="images/backgroundMode.jpg" widht= 150 height = 300  hspace="30" /> 
+
+  <img src="images/backgroundMode.jpg" widht= 150 height = 300  hspace="30" /> 
   
 # Main Features:
 - Alamofire Integration to greatly simplify network requests architecture
